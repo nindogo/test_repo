@@ -10,5 +10,7 @@
 // ==/UserScript==
 
 var x;
-alert("Hello, World!");
+//alert("Hello, World!");
 
+x = document.location.href;
+alert(x);
