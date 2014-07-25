@@ -9,8 +9,12 @@
 // @author nindogo
 // ==/UserScript==
 
-var x;
-//alert("Hello, World!");
-
+var x,y,z;
 x = document.location.href;
-alert(x);
+
+if (x.search("via=vineapp") > -1){
+    y=x.search("via=vineapp");
+    z = x.slice(0,y-1);
+    document.location.replace(z);
+    
+}
