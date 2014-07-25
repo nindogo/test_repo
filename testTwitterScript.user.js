@@ -5,6 +5,9 @@
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
 // @copyright  2014+ Nindogo
+// @author nindogo
 // ==/UserScript==
 
+var x;
 alert("Hello, World!");
+
