@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name      test Twitter UserScript
 // @namespace  http://nindogo0.tumblr.com/
-// @version    0.2.0.1
+// @version    0.2.0.2
+// @run-at document-start
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/testTwitterScript.user.js
