@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      test Twitter UserScript
 // @namespace  http://nindogo0.tumblr.com/
-// @version    0.2.0.2
+// @version    0.2.0.3
 // @run-at document-start
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
@@ -14,7 +14,7 @@ var x,y;
 x = document.location.href;
 
 if (x.search("via=vineapp") > -1){
-    y=x.replace("via=vineapp","");
+    y=x.replace("vineapp","");
     document.location.replace(y);
     
 }
