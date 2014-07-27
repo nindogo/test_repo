@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name      test Twitter UserScript
-// @namespace  http://nindogo0.tumblr.com/
+// @namespace  http://nindogo.tumblr.com/
 // @version    0.2.0.4
 // @run-at document-start
 // @description  Change the redirections by vineapp to stop them having the last part
