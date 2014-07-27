@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name       t.co killer
+// @name       t.coAway
 // @namespace  http://userscripts.org/scripts/show/151019
 // @version    0.1
+// @downloadURL https://github.com/nindogo/test_repo/raw/master/tcoAwayScript.user.js
 // @description  replace t.co link into original link on twitter web page
 // @match      https://twitter.com/*
 // @copyright  2012, Herolee; 2014 nindogo
