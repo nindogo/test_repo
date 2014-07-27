@@ -16,5 +16,4 @@ x = document.location.href;
 if (x.search("via=vineapp") > -1){
     y=x.replace("vineapp","");
     document.location.replace(y);
-    
 }
