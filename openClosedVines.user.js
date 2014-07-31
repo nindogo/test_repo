@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       Open Closed Vines 
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.1
+// @version    0.1.0.2
 // @description  vine Auto Scroll
 // @match      https://vine.co/*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/openClosedVines.user.js
@@ -12,9 +12,10 @@
 var x,i;
 
 window.onscroll = openVines;
-x= document.getElementsByClassName("small");
+
 
 function openVines() {
+    x= document.getElementsByClassName("small");
     for (i = (x.length-1); i > -1; i--) {
         console.log(i);
         console.log(x[i]);
