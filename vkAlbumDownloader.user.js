@@ -12,8 +12,8 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_xmlhttpRequest
-// @version       0.4.0.1
-// @require       http://raw.github.com/vuplea/tiny_zip_js/master/tiny_zip.js
+// @version       0.4.0.2
+// @require       https://github.com/nindogo/tiny_zip_js/raw/master/tiny_zip.js
 // @downloadURL   https://github.com/nindogo/test_repo/raw/master/vkAlbumDownloader.user.js
 // ==/UserScript==
 
