@@ -14,7 +14,7 @@
 // @grant         GM_xmlhttpRequest
 // @version       0.4.0.1
 // @require       http://raw.github.com/vuplea/tiny_zip_js/master/tiny_zip.js
-// @downloadURL   http://userscripts.org/scripts/source/177383.user.js
+// @downloadURL   http://raw.github.com/nindogo/test_repo/vkAlbumDownloader.user.js
 // ==/UserScript==
 
 if (GM_getValue("switch") == undefined) GM_setValue("switch", "on");
