@@ -23,18 +23,15 @@ var nPhotos, album_box, cur_done = Infinity;
 var anchors = document.getElementsByClassName("photo_row");
 //
 
-function is_album()
-{
+function is_album() {
 	return anchors.length > 0 && anchors[0].firstChild.href != undefined;
 }
 
 var reverse;
-function launcher()
-{
-	if (is_album())
-	{
-		if (document.getElementById("vuplea_vk_album") == undefined)
-		{
+
+function launcher() {
+	if (is_album()) {
+		if (document.getElementById("vuplea_vk_album") == undefined) {
 			if (anchors[0].firstChild.href.indexOf("?rev=1") != -1)
 				reverse = true;
 			else
@@ -46,29 +43,29 @@ function launcher()
 }
 var loop = setInterval(launcher, 500);
 
-function update_links()
-{
+function update_links() {
 	if (!is_album()) return;
-	for (var i = cur_done; i < anchors.length; i += splits.length)
-	{
+	for (var i = cur_done; i < anchors.length; i += splits.length) {
 		var splits = get_splits(createUrl(i));
-		for (var j = 0; j < splits.length && i+j < anchors.length; ++j)
-			anchors[i+j].firstChild.href = findLink(splits[j]);
+		for (var j = 0; j < splits.length && i + j < anchors.length; ++j)
+			anchors[i + j].firstChild.href = findLink(splits[j]);
 	}
 	cur_done = anchors.length;
 }
 
-function createUrl(i)
-{
-	return "al_photos.php?act=show&al=1&list=" 
-	+ document.URL.split("/")[3].match(/[a-z\-0-9_]+/)[0]
-	+ (reverse ? "%2Frev" : "") //reverse
-	+ "&offset="
-	+ i;
+function randomString(length) {
+	var result = '';
+	var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+	return result;
 }
 
-function main()
-{
+function createUrl(i) {
+	return "al_photos.php?act=show&al=1&list=" + document.URL.split("/")[3].match(/[a-z\-0-9_]+/)[0] + (reverse ? "%2Frev" : "") //reverse
+		+ "&offset=" + i;
+}
+
+function main() {
 	if (!is_album()) return;
 	anchors = document.getElementsByClassName("photo_row");
 	nPhotos = document.getElementsByClassName("summary")[0].textContent.match(/[0-9]+/)[0];
@@ -86,8 +83,7 @@ function main()
 	scrollB = document.createElement("INPUT");
 	scrollB.type = "button";
 	scrollB.value = "Scroll";
-	var scroll_launcher = function()
-	{
+	var scroll_launcher = function() {
 		scrollB.disabled = "disabled";
 		clearInterval(loop);
 		scroll();
@@ -97,12 +93,11 @@ function main()
 	zipB = document.createElement("INPUT");
 	zipB.type = "button";
 	zipB.value = "Create .zip";
-	zipB.addEventListener("click", function()
-	{
+	zipB.addEventListener("click", function() {
 		zipB.disabled = "disabled";
 		set_switch(relinkB, "on");
 		scroll_launcher();
-		setTimeout(zipper, 300 + nPhotos*4);
+		setTimeout(zipper, 300 + nPhotos * 4);
 	});
 	//
 	var script_row = document.createElement("TR");
@@ -119,11 +114,10 @@ function main()
 		document.getElementById("photos_upload_area_wrap").style.marginTop = "25px";
 }
 
-function get_splits(theUrl)
-{
+function get_splits(theUrl) {
 	var request = new XMLHttpRequest();
-    request.open("GET", theUrl, false);
-    request.send();
+	request.open("GET", theUrl, false);
+	request.send();
 	var all_splits = request.responseText.split(',"hash":');
 	var splits = [];
 	for (var i = 0; i < all_splits.length; ++i)
@@ -132,52 +126,45 @@ function get_splits(theUrl)
 	return splits;
 }
 
-function findLink (mess)
-{
+function findLink(mess) {
 	var sources_string = mess.split(/"._src":"/);
-	sources_string.splice(0,1);
+	sources_string.splice(0, 1);
 	var sources = [];
-	var imax = 0, max_size = 0;
-	for (var i = 0; i < sources_string.length; i++)
-	{
+	var imax = 0,
+		max_size = 0;
+	for (var i = 0; i < sources_string.length; i++) {
 		var src_str = sources_string[i];
 		sources[i] = src_str.split('"')[0];
-		var size = src_str.substring(src_str.lastIndexOf('"')+2, src_str.indexOf("]")).split(",");
-		if (size[0]*size[1] > max_size)
-		{
+		var size = src_str.substring(src_str.lastIndexOf('"') + 2, src_str.indexOf("]")).split(",");
+		if (size[0] * size[1] > max_size) {
 			imax = i;
-			max_size = size[0]*size[1];
+			max_size = size[0] * size[1];
 		}
 	}
 	return sources[imax].replace(/\\\//g, "/");
 }
 
-function set_switch(button, state)
-{
-	if (state == "on")
-	{
+function set_switch(button, state) {
+	if (state == "on") {
 		GM_setValue("switch", "on");
 		button.value = "Disable";
-		button.addEventListener("click", function()
-		{
+		button.addEventListener("click", function() {
 			set_switch(button, "off");
 			location.reload();
 		});
-	}
-	else
-	{
+	} else {
 		GM_setValue("switch", "off");
 		button.value = "Enable";
 		button.addEventListener("click",
-			function(){set_switch(button, "on");})
+			function() {
+				set_switch(button, "on");
+			})
 	}
 }
 
-function scroll()
-{
+function scroll() {
 	if (!is_album()) return;
-	if (anchors.length == nPhotos)
-	{
+	if (anchors.length == nPhotos) {
 		loop = setInterval(launcher, 200);
 		return;
 	}
@@ -186,12 +173,12 @@ function scroll()
 }
 
 var album_title, prog_text, prog_bar, download_row, i, zip;
-function zipper(photo_resp)
-{
+
+function zipper(photo_resp) {
 	if (!is_album()) return;
-	if (photo_resp == undefined)
-	{
+	if (photo_resp == undefined) {
 		album_title = document.title.split("|")[0].trim();
+		random_file_name = randomString(10);
 		//
 		prog_text = document.createElement("TD");
 		prog_text.style.cssText = "margin-left:20px; margin-right:20px";
@@ -210,12 +197,9 @@ function zipper(photo_resp)
 		//
 		i = 0;
 		zip = new tiny_zip();
-	}
-	else
-	{
-		zip.add(album_title + "(" + i + ").jpg", uint8array_from_binstr(photo_resp.responseText));
-		if (i == nPhotos)
-		{
+	} else {
+		zip.add(random_file_name + i + ".jpg", uint8array_from_binstr(photo_resp.responseText));
+		if (i == nPhotos) {
 			var downLink = document.createElement("A");
 			downLink.innerHTML = "File ready!";
 			downLink.download = album_title + ".zip";
@@ -229,14 +213,13 @@ function zipper(photo_resp)
 		}
 	}
 	//
-	GM_xmlhttpRequest
-	({
+	GM_xmlhttpRequest({
 		method: "GET",
 		url: anchors[i].firstChild.href,
 		overrideMimeType: "text/plain; charset=x-user-defined",
 		onload: zipper
 	});
-	i++;	
+	i++;
 	prog_text.innerHTML = i + "/" + nPhotos;
-	prog_bar.fillRect(0,0,300 * i/nPhotos, 25);
+	prog_bar.fillRect(0, 0, 300 * i / nPhotos, 25);
 }
