@@ -6,10 +6,11 @@
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/autoTwitterIntentScript2.user.js
+// @require https://github.com/medialize/URI.js/raw/gh-pages/src/URI.js
 // @copyright  2014+ Nindogo
 // @author nindogo
 // ==/UserScript==
-// @require https://github.com/medialize/URI.js/raw/gh-pages/src/URI.js
+
 
 
 var x,y,z,uri;
