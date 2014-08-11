@@ -9,7 +9,7 @@
 // @copyright  2014+ Nindogo
 // @author nindogo
 // ==/UserScript==
-// @require https://github.com/medialize/URI.js/raw/gh-pages/src/URI.min.js
+// @require https://github.com/medialize/URI.js/raw/gh-pages/src/URI.js
 
 
 var x,y,z,uri;
