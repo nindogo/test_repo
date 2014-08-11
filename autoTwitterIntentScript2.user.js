@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Auto Twitter Intent Script 2 - removing via
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.1
+// @version    0.1.0.2
 // @run-at document-start
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
@@ -23,13 +23,12 @@ if (x.search("via=vineapp") > -1){
     uri.removeSearch("related");
     y=uri.toString();
     //y=x.replace("via=vineapp","");
-    //document.location.replace(y);
-    alert(y);
+    document.location.replace(y);
+    //alert(y);
 }
-/*
+
 if (!(x.search("via=vineapp") > -1)){
     z=document.getElementById("update-form");
     console.log(z);
     z.submit();
 }
-*/
