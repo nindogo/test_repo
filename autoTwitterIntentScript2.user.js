@@ -20,7 +20,10 @@ w = URI.parseQuery(uri.query().toString());
 console.log(w);
 
 if (w.url == w.original_referer){
-    window.close();
+    z=w.url;
+    if (!(z.search("https://vine.co/v/") > -1)){
+        window.close();
+    }
 }
 
 if (x.search("via=vineapp") > -1){
