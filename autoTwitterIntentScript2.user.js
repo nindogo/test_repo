@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Auto Twitter Intent Script 2 - removing via
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.5
+// @version    0.1.0.6
 // @run-at document-start
 // @description  Change the redirections by vineapp to stop them having the last part
 // @match      https://twitter.com/intent/tweet?*
