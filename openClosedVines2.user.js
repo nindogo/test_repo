@@ -5,7 +5,7 @@
 // @description  open vines that are hidden due to sensitivity.
 // @match      https://vine.co/*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/openClosedVines2.user.js
-// @require https://mutation-summary.googlecode.com/git/src/mutation-summary.js
+// @require https://github.com/nindogo/test_repo/raw/master/mutation-summary.js
 // @run-at  document-end
 // @copyright  2014+, Nindogo
 // ==/UserScript==
