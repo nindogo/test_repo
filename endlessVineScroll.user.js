@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name       Scroll Vine 
+// @name       Scroll Vine Endlessly
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.3
+// @version    0.1.0.4
 // @description  vine Auto Scroll
 // @match      https://vine.co/*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/endlessVineScroll.user.js
