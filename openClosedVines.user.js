@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name       open sensitive Vines
+// @name       Auto open sensitive Vines
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.3
+// @version    0.1.0.4
 // @description  open vines that are hidden due to sensitivity.
 // @match      https://vine.co/*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/openClosedVines.user.js
