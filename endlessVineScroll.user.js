@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name       Scroll Vine Endlessly
 // @namespace  http://nindogo.tumblr.com/
+// @author  nindogo
 // @version    0.1.0.4
 // @description  vine Auto Scroll
 // @match      https://vine.co/*
