@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name       Auto open sensitive Vines
 // @namespace  http://nindogo.tumblr.com/
+// @author     Ni Ndogo
 // @version    0.1.1.0
 // @description  open vines that are hidden due to sensitivity.
 // @match      https://vine.co/*
