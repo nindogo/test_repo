@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name      Auto Twitter Intent Script 2 - removing via
+// @name      Auto Twitter Intent Script
 // @namespace  http://nindogo.tumblr.com/
 // @version    0.1.0.6
 // @run-at document-start
-// @description  Change the redirections by vineapp to stop them having the last part
+// @description  Automatically twits vines and removes any text in them (including the via)
 // @match      https://twitter.com/intent/tweet?*
-// @downloadURL https://github.com/nindogo/test_repo/raw/master/autoTwitterIntentScript2.user.js
+// @downloadURL https://github.com/nindogo/test_repo/raw/master/autoTwitterIntentScript.user.js
 // @require https://github.com/medialize/URI.js/raw/gh-pages/src/URI.js
 // @copyright  2014+ Nindogo
 // @author nindogo
