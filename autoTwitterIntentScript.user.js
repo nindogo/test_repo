@@ -29,7 +29,7 @@ if (w.url == w.original_referer){
 if (x.search("via=vineapp") > -1){
     u = new URI("https://twitter.com/intent/tweet");
     u.addSearch("url", w.url);
-    u.addSearch("text","👍"�url);
+    u.addSearch("text","👍");
     u.addSearch("original_referer", w.original_referer);
     y=u.toString();
     document.location.replace(y);
