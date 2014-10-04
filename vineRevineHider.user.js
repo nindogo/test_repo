@@ -5,6 +5,7 @@
 // @description  On Vine Feed show only vines that are original. No Revines.
 // @author       nindogo
 // @match      https://vine.co/feed*
+// @downloadURL https://github.com/nindogo/test_repo/raw/master/vineRevineHider.user.js
 // @grant         GM_addStyle 
 // @run-at        document-start
 // ==/UserScript==
