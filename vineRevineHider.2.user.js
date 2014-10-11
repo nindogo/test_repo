@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		vine Revine Hider on Feed
 // @namespace	http://nindogo.tumblr.com
-// @version		0.1.4
+// @version		0.1.5
 // @description	On Vine Feed show only vines that are original. No Revines.
 // @author		nindogo
 // @match		*://vine.co/*
@@ -19,6 +19,9 @@ var observer = new MutationSummary({
 });
 
 function chuckRevines(summary) {
+    //$(".post-byline").parent().next().next().remove();
+    $(".post-byline").parent().next("script").remove();
+    $(".post-byline").parent().prev("script").remove();
     $(".post-byline").parent().remove();
     console.log("should be done now!");
 }
