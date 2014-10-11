@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         vine Revine Hider on Feed
 // @namespace    http://nindogo.tumblr.com
-// @version      0.1.2
+// @version      0.1.3
 // @description  On Vine Feed show only vines that are original. No Revines.
 // @author       nindogo
 // @match      https://vine.co/feed*
 // @downloadURL https://github.com/nindogo/test_repo/raw/master/vineRevineHider.2.user.js
 // @grant         GM_addStyle
 // @grant       unsafeWindow
-// @require     //ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+// @require     https//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
 // @run-at        document-end
 // ==/UserScript==
 
