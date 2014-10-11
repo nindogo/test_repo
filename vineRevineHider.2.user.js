@@ -20,7 +20,7 @@ var observer = new MutationSummary({
 
 function chuckRevines(summary) {
     //$(".post-byline").parent().next().next().remove();
-    $(".post-byline").parent().next("script").remove();
+    //$(".post-byline").parent().next("script").remove();
     $(".post-byline").parent().prev("script").remove();
     $(".post-byline").parent().remove();
     console.log("should be done now!");
