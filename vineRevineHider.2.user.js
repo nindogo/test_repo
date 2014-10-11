@@ -1,24 +1,24 @@
 // ==UserScript==
-// @name         vine Revine Hider on Feed
-// @namespace    http://nindogo.tumblr.com
-// @version      0.1.3
-// @description  On Vine Feed show only vines that are original. No Revines.
-// @author       nindogo
-// @match      https://vine.co/feed*
-// @downloadURL https://github.com/nindogo/test_repo/raw/master/vineRevineHider.2.user.js
-// @grant         GM_addStyle
-// @grant       unsafeWindow
-// @require     https//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @run-at        document-end
+// @name		vine Revine Hider on Feed
+// @namespace	http://nindogo.tumblr.com
+// @version		0.1.4
+// @description	On Vine Feed show only vines that are original. No Revines.
+// @author		nindogo
+// @match		*://vine.co/*
+// @downloadURL	https://github.com/nindogo/test_repo/raw/master/vineRevineHider.2.user.js
+// @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+// @require 	https://github.com/nindogo/test_repo/raw/master/mutation-summary.js
+// @run-at      document-end
 // ==/UserScript==
 
-(function () {
-    
-    console.log("start");
+var observer = new MutationSummary({
+    callback: chuckRevines,
+    queries: [{
+        element: '.post-byline',
+    }]
+});
+
+function chuckRevines(summary) {
     $(".post-byline").parent().remove();
-    console.log("end");
-    // class is . and id is #
-    //GM_addStyle('.post-byline ~ .card  { background-color: #b0c4de; }');
-    //GM_addStyle('.post-byline ~ .card  { display:none !important; }');
-    //GM_addStyle('.post-byline  { display:none !important; }');
-}) ();
+    console.log("should be done now!");
+}
