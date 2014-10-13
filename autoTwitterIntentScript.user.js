@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Auto Twitter Intent Script
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.7a
+// @version    0.1.0.7b
 // @run-at document-start
 // @description  Automatically twits vines and removes any text in them (including the via)
 // @match      https://twitter.com/intent/tweet?*
@@ -13,11 +13,12 @@
 
 
 
-var u,w,x,y,z,uri;
+var u,w,x,y,z,uri,searchString;
 x = document.location.href;
 uri = new URI(x);
 w = URI.parseQuery(uri.query().toString());
 console.log(w);
+searchString = "via=vine";
 
 if (w.url == w.original_referer){
     z=w.url;
@@ -26,7 +27,7 @@ if (w.url == w.original_referer){
     }
 }
 
-if (x.search("via=vineapp") > -1){
+if (x.search(searchString) > -1){
     u = new URI("https://twitter.com/intent/tweet");
     u.addSearch("url", w.url);
     u.addSearch("text","👍 💦");
@@ -36,7 +37,7 @@ if (x.search("via=vineapp") > -1){
 }
 
 
-if (!(x.search("via=vineapp") > -1)){
+if (!(x.search(searchString) > -1)){
     z=document.getElementById("update-form");
     console.log(z);
     z.submit();
