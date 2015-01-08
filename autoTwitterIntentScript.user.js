@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Auto Twitter Intent Script
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.8b
+// @version    0.1.0.9
 // @run-at document-start
 // @description  Automatically twits vines and removes any text in them (including the via)
 // @match      https://twitter.com/intent/tweet?*
