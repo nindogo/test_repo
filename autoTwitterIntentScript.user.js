@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name      Auto Twitter Intent Script
 // @namespace  http://nindogo.tumblr.com/
-// @version    0.1.0.7b
+// @version    0.1.0.8
 // @run-at document-start
 // @description  Automatically twits vines and removes any text in them (including the via)
 // @match      https://twitter.com/intent/tweet?*
@@ -18,7 +18,7 @@ x = document.location.href;
 uri = new URI(x);
 w = URI.parseQuery(uri.query().toString());
 console.log(w);
-searchString = "via=vine";
+searchString = "=vine";
 
 if (w.url == w.original_referer){
     z=w.url;
