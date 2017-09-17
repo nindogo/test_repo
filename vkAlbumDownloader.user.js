@@ -12,7 +12,7 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_xmlhttpRequest
-// @version       0.4.0.2
+// @version       0.4.0.3
 // @require       https://github.com/nindogo/tiny_zip_js/raw/master/tiny_zip.js
 // @downloadURL   https://github.com/nindogo/test_repo/raw/master/vkAlbumDownloader.user.js
 // ==/UserScript==
@@ -20,7 +20,7 @@
 if (GM_getValue("switch") == undefined) GM_setValue("switch", "on");
 //
 var nPhotos, album_box, cur_done = Infinity;
-var anchors = document.getElementsByClassName("photo_row");
+var anchors = document.getElementsByClassName("photos_row");
 //
 
 function is_album() {
