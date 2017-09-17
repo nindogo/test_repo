@@ -12,26 +12,26 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_xmlhttpRequest
-// @version       0.4.0.3
+// @version       0.4.0.4
 // @require       https://github.com/nindogo/tiny_zip_js/raw/master/tiny_zip.js
 // @downloadURL   https://github.com/nindogo/test_repo/raw/master/vkAlbumDownloader.user.js
 // ==/UserScript==
 
-if (GM_getValue("switch") == undefined) GM_setValue("switch", "on");
+if (GM_getValue("switch") === undefined) GM_setValue("switch", "on");
 //
 var nPhotos, album_box, cur_done = Infinity;
 var anchors = document.getElementsByClassName("photos_row");
 //
 
 function is_album() {
-	return anchors.length > 0 && anchors[0].firstChild.href != undefined;
+	return anchors.length > 0 && anchors[0].firstChild.href !== undefined;
 }
 
 var reverse;
 
 function launcher() {
 	if (is_album()) {
-		if (document.getElementById("vuplea_vk_album") == undefined) {
+		if (document.getElementById("vuplea_vk_album") === undefined) {
 			if (anchors[0].firstChild.href.indexOf("?rev=1") != -1)
 				reverse = true;
 			else
@@ -70,7 +70,7 @@ function main() {
 	anchors = document.getElementsByClassName("photo_row");
 	nPhotos = document.getElementsByClassName("summary")[0].textContent.match(/[0-9]+/)[0];
 	album_box = document.getElementsByClassName("photos_album_page")[0];
-	if (album_box == undefined) album_box = document.getElementsByClassName("photos_tag_page")[0];
+	if (album_box === undefined) album_box = document.getElementsByClassName("photos_tag_page")[0];
 	cur_done = 0;
 	//
 	var text = document.createElement("TD");
@@ -110,7 +110,7 @@ function main() {
 	script_table.style.cssText = "margin-left:22px; margin-top:10px; margin-bottom:-15px";
 	script_table.appendChild(script_row);
 	album_box.insertBefore(script_table, album_box.firstChild);
-	if (document.getElementById("photos_upload_area_wrap") != undefined)
+	if (document.getElementById("photos_upload_area_wrap") !== undefined)
 		document.getElementById("photos_upload_area_wrap").style.marginTop = "25px";
 }
 
@@ -176,7 +176,7 @@ var album_title, prog_text, prog_bar, download_row, i, zip;
 
 function zipper(photo_resp) {
 	if (!is_album()) return;
-	if (photo_resp == undefined) {
+	if (photo_resp === undefined) {
 		album_title = document.title.split("|")[0].trim();
 		random_file_name = randomString(10);
 		//
