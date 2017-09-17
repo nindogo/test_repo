@@ -12,7 +12,7 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_xmlhttpRequest
-// @version       0.4.0.4
+// @version       0.4.0.5
 // @require       https://github.com/nindogo/tiny_zip_js/raw/master/tiny_zip.js
 // @downloadURL   https://github.com/nindogo/test_repo/raw/master/vkAlbumDownloader.user.js
 // ==/UserScript==
@@ -45,8 +45,7 @@ var loop = setInterval(launcher, 500);
 
 function update_links() {
 	if (!is_album()) return;
-	for (var i = cur_done; i < anchors.length; i += splits.length) {
-		var splits = get_splits(createUrl(i));
+	for (var i = cur_done,splits = get_splits(createUrl(i)); i < anchors.length; i += splits.length) {
 		for (var j = 0; j < splits.length && i + j < anchors.length; ++j)
 			anchors[i + j].firstChild.href = findLink(splits[j]);
 	}
@@ -61,8 +60,7 @@ function randomString(length) {
 }
 
 function createUrl(i) {
-	return "al_photos.php?act=show&al=1&list=" + document.URL.split("/")[3].match(/[a-z\-0-9_]+/)[0] + (reverse ? "%2Frev" : "") //reverse
-		+ "&offset=" + i;
+	return "al_photos.php?act=show&al=1&list=" + document.URL.split("/")[3].match(/[a-z\-0-9_]+/)[0] + (reverse ? "%2Frev" : "") + "&offset=" + i;
 }
 
 function main() {
@@ -158,7 +156,7 @@ function set_switch(button, state) {
 		button.addEventListener("click",
 			function() {
 				set_switch(button, "on");
-			})
+			});
 	}
 }
 
