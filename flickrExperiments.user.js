@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         New Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.0.1
 // @description  try to take over the world!
-// @author       You
-// @match        https://www.flickr.com/photos/tgreen/
+// @author       Ni Ndogo
+// @match        https://www.flickr.com/photos/*
+// @match        http*://www.flickr.com/photos/*
 // @grant        none
 // ==/UserScript==
 
