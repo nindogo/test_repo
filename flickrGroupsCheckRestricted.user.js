@@ -10,6 +10,7 @@
 //                  Selectors and the following script require jQuery.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
+//@downloadURL      https://github.com/nindogo/test_repo/raw/master/flickrGroupsCheckRestricted.user.js
 // ==/UserScript==
 
 waitForKeyElements(".view.photo-list-photo-view.awake", showHiddenOrOpen, bWaitOnce=false);
