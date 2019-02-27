@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            flickrGroupsCheckRestricted
 // @namespace       http://tampermonkey.net/
-// @version         20190222
+// @version         20190227
 // @description     try to take over the world!
 // @author          You
 // @match           https://www.flickr.com/groups/*/pool/*
@@ -20,7 +20,7 @@ waitForKeyElements(".pool-photo.photo-display-item", showHiddenOrOpen_2);
 
 function showHiddenOrOpen(jNode){
 
-    var photo_id = ((((jNode[0].style.backgroundImage).split("/"))[5]).split("_"))[0];
+    var photo_id = ((((jNode[0].style.backgroundImage).split("/"))[4]).split("_"))[0];
 
     var protocol = window.location.protocol;
     var api_key = "9f7fba1e66c150084f948ab8df0ce3a9"
