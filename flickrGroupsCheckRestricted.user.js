@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            flickrGroupsCheckRestricted
 // @namespace       http://tampermonkey.net/
-// @version         20190227
+// @version         20190228
 // @description     try to take over the world!
 // @author          You
 // @match           https://www.flickr.com/groups/*/pool/*
@@ -40,10 +40,10 @@ function showHiddenOrOpen(jNode){
             var b = response.context[0];
 
             if (a == 'ok') {
-                b.style.border = "5px solid #39ff14";
+                b.style.border = "2.5px solid #39ff14";
             }
             else if (a == 'fail'){
-                b.style.border = "5px solid #F71F12";
+                b.style.border = "2.5px solid #F71F12";
             }
 
         }
