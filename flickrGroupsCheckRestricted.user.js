@@ -5,6 +5,7 @@
 // @description     try to take over the world!
 // @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
+// @match           https://www.flickr.com/photos/*/
 // @grant           GM_xmlhttpRequest
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 //                  Selectors and the following script require jQuery.
