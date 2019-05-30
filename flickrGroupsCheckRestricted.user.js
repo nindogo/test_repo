@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name            flickrGroupsCheckRestricted
 // @namespace       http://tampermonkey.net/
-// @version         20190228
+// @version         20190530
 // @description     try to take over the world!
-// @author          You
+// @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
 // @grant           GM_xmlhttpRequest
-// @require         https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
+// @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 //                  Selectors and the following script require jQuery.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
