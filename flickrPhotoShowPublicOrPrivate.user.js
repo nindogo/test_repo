@@ -2,7 +2,7 @@
 // @name            flickrPhotoShowPublicOrPrivate
 // @namespace       http://tampermonkey.net/
 // @version         20190731
-// @description     try to take over the world!
+// @description     On Flickr show whether a photo is public or private by drawing a colored box around it.
 // @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
 // @match           https://www.flickr.com/photos/*/
