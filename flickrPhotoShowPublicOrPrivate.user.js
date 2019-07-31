@@ -1,22 +1,25 @@
 // ==UserScript==
-// @name            flickrGroupsCheckRestricted
+// @name            flickrPhotoShowPublicOrPrivate
 // @namespace       http://tampermonkey.net/
-// @version         20190530
+// @version         20190731
 // @description     try to take over the world!
 // @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
 // @match           https://www.flickr.com/photos/*/
+// @match           https://www.flickr.com
 // @grant           GM_xmlhttpRequest
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 //                  Selectors and the following script require jQuery.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
-//@downloadURL      https://github.com/nindogo/test_repo/raw/master/flickrGroupsCheckRestricted.user.js
+//@downloadURL      https://github.com/nindogo/test_repo/raw/master/flickrPhotoShowPublicOrPrivate.user.js
 // ==/UserScript==
 
 waitForKeyElements(".view.photo-list-photo-view.awake", showHiddenOrOpen, bWaitOnce=false);
 
 waitForKeyElements(".pool-photo.photo-display-item", showHiddenOrOpen_2);
+
+waitForKeyElements(".activity-card-photo  ", showHiddenOrOpen_2);
 
 
 function showHiddenOrOpen(jNode){
