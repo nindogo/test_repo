@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ViperGirls Images
 // @namespace    https://nindogo.tumblr.com/
-// @version      20200401.1
+// @version      20200402
 // @description  Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -32,6 +32,13 @@ waitForKeyElements('a[href^="http://www.imagebam.com/image/"', process_imagebam)
 // AcidImg
 waitForKeyElements('a[href^="https://acidimg.cc/"', process_acidimg);
 
+// PimpAndHost
+waitForKeyElements('a[href^="https://pimpandhost.com/image/"', process_pimpandhost);
+
+// PixHost
+waitForKeyElements('a[href^="https://pixhost.to/show/"', process_pixhost);
+
+
 function process_imx_to(jNode){
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
 }
@@ -49,7 +56,6 @@ function process_imxto_2(jNode){
         }
     })
 }
-
 
 function process_turboimage(jNode){
     var img_page = jNode[0].childNodes[0].src;
@@ -69,7 +75,6 @@ function process_turboimage(jNode){
     })
 }
 
-
 function process_imagebam(jNode){
     var img_page = jNode[0].childNodes[0].src;
     var site_url = jNode[0].href;
@@ -88,10 +93,28 @@ function process_imagebam(jNode){
     })
 }
 
-
 function process_acidimg(jNode) {
 //     console.log(jNode[0])
     jNode[0].href = jNode[0].childNodes[0].src.replace('/upload/small/', '/upload/big/')
 //     console.log(jNode[0].childNodes)
 
+}
+
+function process_pimpandhost(jNode) {
+    function replace_url(match, p1, offset, string){
+        return string.replace('_s.', '_l.')
+    }
+
+    var replacer = jNode[0].childNodes[0].src.replace(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../, replace_url)
+    if (replacer) {
+        jNode[0].href = replacer
+    }
+}
+
+function process_pixhost(jNode) {
+    function replace_url(match, p1, p2, offset, string) {
+        return p1 + 'img' + p2
+    }
+    var img_url = jNode[0].childNodes[0].src.replace('/thumbs/', '/images/').match(/http.*?t[0-9]*?\.pixhost\.to.*/)
+    jNode[0].href = img_url.input.replace(/(http.*?)t([0-9]*?\.pixhost.to.*)/, replace_url)
 }
