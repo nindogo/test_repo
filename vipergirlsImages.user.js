@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200403.1
+// @version         20200403.2
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -70,7 +70,7 @@ function process_imxto_2(jNode){
         context: jNode,
         onload: function(response){
             response.context[0].parentNode.href = response.finalUrl.replace('/t/', '/i/')
-            open_in_tab(jNode[0].parentNode)
+            open_in_tab(context[0].parentNode)
         }
     })
 }
