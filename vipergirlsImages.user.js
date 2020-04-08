@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200403
+// @version         20200403.1
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -14,6 +14,14 @@
 // @connect         imx.to
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
+
+function open_in_tab(node) {
+    var clickHandler = function(e) {
+        GM_openInTab(node.href, 'loadInBackground');
+        e.preventDefault();
+    };
+    node.addEventListener('click', clickHandler, false);
+}
 
 // imx.to
 waitForKeyElements('a>img[src^="https://imx.to/u/t/"', process_imx_to);
@@ -49,6 +57,7 @@ waitForKeyElements('a[href^="http://imgbox.com/"', process_imgbox);
 
 function process_imx_to(jNode){
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
+    open_in_tab(jNode[0].parentNode);
 }
 
 function process_imxto_2(jNode){
@@ -61,6 +70,7 @@ function process_imxto_2(jNode){
         context: jNode,
         onload: function(response){
             response.context[0].parentNode.href = response.finalUrl.replace('/t/', '/i/')
+            open_in_tab(jNode[0].parentNode)
         }
     })
 }
