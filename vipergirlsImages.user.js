@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         ViperGirls Images
-// @namespace    https://nindogo.tumblr.com/
-// @version      20200402
-// @description  Link to the actual image in vipergirls.
+// @name            ViperGirls Images
+// @namespace       https://nindogo.tumblr.com/
+// @version         20200403
+// @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
-// @author       nindogo
-// @match        http://vipergirls.to/*
-// @match        https://vipergirls.to/*
+// @author          nindogo
+// @match           http://vipergirls.to/*
+// @match           https://vipergirls.to/*
 // @grant           GM_xmlhttpRequest
 // @connect         turboimagehost.com
 // @connect         imagebam.com
@@ -27,16 +27,24 @@ waitForKeyElements('a[href^="https://www.turboimagehost.com/"', process_turboima
 waitForKeyElements('a[href^="http://www.turboimagehost.com/"', process_turboimage);
 
 // ImageBam
+waitForKeyElements('a[href^="https://www.imagebam.com/image/"', process_imagebam);
 waitForKeyElements('a[href^="http://www.imagebam.com/image/"', process_imagebam);
 
 // AcidImg
 waitForKeyElements('a[href^="https://acidimg.cc/"', process_acidimg);
+waitForKeyElements('a[href^="http://acidimg.cc/"', process_acidimg);
 
 // PimpAndHost
 waitForKeyElements('a[href^="https://pimpandhost.com/image/"', process_pimpandhost);
+waitForKeyElements('a[href^="http://pimpandhost.com/image/"', process_pimpandhost);
 
 // PixHost
 waitForKeyElements('a[href^="https://pixhost.to/show/"', process_pixhost);
+waitForKeyElements('a[href^="http://pixhost.to/show/"', process_pixhost);
+
+// ImgBox
+waitForKeyElements('a[href^="https://imgbox.com/"', process_imgbox);
+waitForKeyElements('a[href^="http://imgbox.com/"', process_imgbox);
 
 
 function process_imx_to(jNode){
@@ -117,4 +125,8 @@ function process_pixhost(jNode) {
     }
     var img_url = jNode[0].childNodes[0].src.replace('/thumbs/', '/images/').match(/http.*?t[0-9]*?\.pixhost\.to.*/)
     jNode[0].href = img_url.input.replace(/(http.*?)t([0-9]*?\.pixhost.to.*)/, replace_url)
+}
+
+function process_imgbox(jNode) {
+    jNode[0].href = jNode[0].childNodes[0].src.replace('_t.', '_o.').replace('/thumbs', '/images');
 }
