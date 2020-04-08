@@ -90,6 +90,7 @@ function process_turboimage(jNode){
 //             var img_url = this_page.match(re_link)[1]
 //             response.context[0].href = img_url
             response.context[0].href = response.responseText.match(re_link)[1]
+            open_in_tab(response.context[0]);
         }
     })
 }
@@ -108,6 +109,7 @@ function process_imagebam(jNode){
 //             var img_url = this_page.match(re_link)[1]
 //             response.context[0].href = img_url
             response.context[0].href = response.responseText.match(re_link)[1]
+            open_in_tab(response.context[0]);
         }
     })
 }
@@ -115,6 +117,7 @@ function process_imagebam(jNode){
 function process_acidimg(jNode) {
 //     console.log(jNode[0])
     jNode[0].href = jNode[0].childNodes[0].src.replace('/upload/small/', '/upload/big/')
+    open_in_tab(jNode[0]);
 //     console.log(jNode[0].childNodes)
 
 }
@@ -127,6 +130,7 @@ function process_pimpandhost(jNode) {
     var replacer = jNode[0].childNodes[0].src.replace(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../, replace_url)
     if (replacer) {
         jNode[0].href = replacer
+        open_in_tab(jNode[0]);
     }
 }
 
@@ -134,10 +138,12 @@ function process_pixhost(jNode) {
     function replace_url(match, p1, p2, offset, string) {
         return p1 + 'img' + p2
     }
-    var img_url = jNode[0].childNodes[0].src.replace('/thumbs/', '/images/').match(/http.*?t[0-9]*?\.pixhost\.to.*/)
-    jNode[0].href = img_url.input.replace(/(http.*?)t([0-9]*?\.pixhost.to.*)/, replace_url)
+    var img_url = jNode[0].childNodes[0].src.replace('/thumbs/', '/images/').match(/http.*?t[0-9]*?\.pixhost\.to.*/);
+    jNode[0].href = img_url.input.replace(/(http.*?)t([0-9]*?\.pixhost.to.*)/, replace_url);
+    open_in_tab(jNode[0]);
 }
 
 function process_imgbox(jNode) {
     jNode[0].href = jNode[0].childNodes[0].src.replace('_t.', '_o.').replace('/thumbs', '/images');
+    open_in_tab(jNode[0]);
 }
