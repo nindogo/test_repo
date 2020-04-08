@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200403.3
+// @version         20200403.5
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
 // @author          nindogo
 // @match           http://vipergirls.to/*
 // @match           https://vipergirls.to/*
+// @grant           GM_openInTab
 // @grant           GM_xmlhttpRequest
 // @connect         turboimagehost.com
 // @connect         imagebam.com
@@ -57,7 +58,6 @@ waitForKeyElements('a[href^="http://imgbox.com/"', process_imgbox);
 
 function process_imx_to(jNode){
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
-    console.log(jNode[0].parentNode);
     open_in_tab(jNode[0].parentNode);
 }
 
@@ -71,8 +71,7 @@ function process_imxto_2(jNode){
         context: jNode,
         onload: function(response){
             response.context[0].parentNode.href = response.finalUrl.replace('/t/', '/i/')
-            console.log(context[0].parentNode);
-            open_in_tab(context[0].parentNode);
+            open_in_tab(response.context[0].parentNode);
         }
     })
 }
