@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200403.5
+// @version         20200404
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
+// @require         https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js
+//                  jQuery
 // @author          nindogo
 // @match           http://vipergirls.to/*
 // @match           https://vipergirls.to/*
@@ -13,6 +15,7 @@
 // @connect         turboimagehost.com
 // @connect         imagebam.com
 // @connect         imx.to
+// @connect         fastpic.ru
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
 
@@ -54,6 +57,10 @@ waitForKeyElements('a[href^="http://pixhost.to/show/"', process_pixhost);
 // ImgBox
 waitForKeyElements('a[href^="https://imgbox.com/"', process_imgbox);
 waitForKeyElements('a[href^="http://imgbox.com/"', process_imgbox);
+
+// Fastpic.ru
+waitForKeyElements('a[href^="https://fastpic.ru/"', process_fastpic);
+waitForKeyElements('a[href^="http://fastpic.ru/"', process_fastpic);
 
 
 function process_imx_to(jNode){
@@ -146,4 +153,21 @@ function process_pixhost(jNode) {
 function process_imgbox(jNode) {
     jNode[0].href = jNode[0].childNodes[0].src.replace('_t.', '_o.').replace('/thumbs', '/images');
     open_in_tab(jNode[0]);
+}
+
+function process_fastpic(jNode) {
+    var site_url = jNode[0].href
+    var re_link = /loading_img.*?=.*?('|")(.*?)('|");/
+//     open_in_tab(jNode[0])
+
+//     GM_xmlhttpRequest({
+//         method: 'GET',
+//         url: site_url,
+//         context: jNode,
+//         onload: function(response) {
+//             response.context[0].href = response.response.match(re_link)[2]
+//             console.log(response.responseHeaders);
+//         }
+//     })
+//     console.log(site_url)
 }
