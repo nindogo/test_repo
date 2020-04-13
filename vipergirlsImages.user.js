@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200404
+// @version         20200405
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -16,6 +16,9 @@
 // @connect         imagebam.com
 // @connect         imx.to
 // @connect         fastpic.ru
+// @connect         dpic.me
+// @connect         depic.me
+// @connect         imagevenue.com
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
 
@@ -62,6 +65,14 @@ waitForKeyElements('a[href^="http://imgbox.com/"', process_imgbox);
 waitForKeyElements('a[href^="https://fastpic.ru/"', process_fastpic);
 waitForKeyElements('a[href^="http://fastpic.ru/"', process_fastpic);
 
+// dpic.me
+waitForKeyElements('a[href^="https://dpic.me/"', process_dpic);
+waitForKeyElements('a[href^="http://dpic.me/"', process_dpic);
+waitForKeyElements('a[href^="https://depic.me/"', process_dpic);
+waitForKeyElements('a[href^="http://depic.me/"', process_dpic);
+
+// imagevenue.com
+waitForKeyElements('a[href*="imagevenue.com"', process_imagevenue);
 
 function process_imx_to(jNode){
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
@@ -69,8 +80,6 @@ function process_imx_to(jNode){
 }
 
 function process_imxto_2(jNode){
-//     console.log(jNode[0].src)
-/*     console.log(jNode[0].parentNode.href) */
     var site_url = jNode[0].src
     GM_xmlhttpRequest({
         method: 'GET',
@@ -93,9 +102,6 @@ function process_turboimage(jNode){
         url: site_url,
         context: jNode,
         onload: function(response){
-//             var this_page = response.responseText;
-//             var img_url = this_page.match(re_link)[1]
-//             response.context[0].href = img_url
             response.context[0].href = response.responseText.match(re_link)[1]
             open_in_tab(response.context[0]);
         }
@@ -112,9 +118,6 @@ function process_imagebam(jNode){
         url: site_url,
         context: jNode,
         onload: function(response){
-//             var this_page = response.responseText;
-//             var img_url = this_page.match(re_link)[1]
-//             response.context[0].href = img_url
             response.context[0].href = response.responseText.match(re_link)[1]
             open_in_tab(response.context[0]);
         }
@@ -122,10 +125,8 @@ function process_imagebam(jNode){
 }
 
 function process_acidimg(jNode) {
-//     console.log(jNode[0])
     jNode[0].href = jNode[0].childNodes[0].src.replace('/upload/small/', '/upload/big/')
     open_in_tab(jNode[0]);
-//     console.log(jNode[0].childNodes)
 
 }
 
@@ -158,16 +159,47 @@ function process_imgbox(jNode) {
 function process_fastpic(jNode) {
     var site_url = jNode[0].href
     var re_link = /loading_img.*?=.*?('|")(.*?)('|");/
-//     open_in_tab(jNode[0])
 
-//     GM_xmlhttpRequest({
-//         method: 'GET',
-//         url: site_url,
-//         context: jNode,
-//         onload: function(response) {
-//             response.context[0].href = response.response.match(re_link)[2]
-//             console.log(response.responseHeaders);
-//         }
-//     })
-//     console.log(site_url)
+    console.error(site_url);
+
+    }
+
+function process_dpic(jNode) {
+    var site_url = jNode[0].href
+    var re_link = /<img src=['|"](.*?)['|"]/
+
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: site_url,
+        context: jNode,
+        onload: function(response){
+            response.context[0].href = response.response.match(re_link)[1]
+            open_in_tab(response.context[0])
+        }
+    })
+
+}
+
+function process_imagevenue(jNode) {
+    var site_url = jNode[0].href
+    var re_link = /(img|IMG).*?[s|S][R|r][C|c]=["|'](.*?)['|"]/
+
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: site_url,
+        context: jNode,
+        onload: function(response){
+            var response_link = response.response.match(re_link);
+            try{
+                if (response_link[2]) {
+                    response.context[0].href = (response.finalUrl).split('img.php')[0] + response_link[2]
+                    open_in_tab(response.context[0])
+                }
+            }
+            catch(error)
+            {
+                typeof Function.prototype === "function"
+            }
+        }
+    })
 }
