@@ -16,7 +16,7 @@ Ebony Porn Stars 2020::
  - Daya Knight
  - Demi Sutra
  - Diamond Banks
-   - Amethyst Banks
+   * Amethyst Banks
  - Diamond Jackson
  - Halle Hayes
  - Harley Dean
