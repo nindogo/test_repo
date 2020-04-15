@@ -1,7 +1,7 @@
 # 2020 list
 
 Ebony Porn Stars 2020::
-   - Aaliyah Hadid
+ - Aaliyah Hadid
  - Alexis Avery
  - Ana Foxxx
  - Anya Ivy
