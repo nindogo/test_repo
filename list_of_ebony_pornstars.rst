@@ -3,7 +3,6 @@
 Ebony Porn Stars 2020::
  - Aaliyah Hadid
  - Alexis Avery
- - Amethyst Banks
  - Ana Foxxx
  - Anya Ivy
  - Aryana Adin
@@ -17,6 +16,8 @@ Ebony Porn Stars 2020::
  - Daya Knight
  - Demi Sutra
  - Diamond Banks
+   AKA::
+   - Amethyst Banks
  - Diamond Jackson
  - Halle Hayes
  - Harley Dean
