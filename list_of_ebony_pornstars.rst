@@ -30,6 +30,7 @@ Ebony Porn Stars 2020::
  - Kiki Minaj
  - Kira Noir
  - Layton Benton
+ - Lala Ivey
  - Lola Marie
  - Maya Bijou
  - Misty Stone
