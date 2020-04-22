@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200410
+// @version         20200410.1
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -132,15 +132,16 @@ function process_acidimg(jNode) {
 }
 
 function process_pimpandhost(jNode) {
-    function replace_url(match, p1, offset, string){
-        return string.replace('_s.', '_l.')
-    }
+
+    // Test URLS
+    // https://vipergirls.to/threads/4566928-Muscular-beauties-show-their-seductive-charms
+    // https://vipergirls.to/threads/4562726-Collection-of-porn-scenes-with-sexy-black-girls
 
     var replacer = null
-    if (jNode[0].childNodes[0].src.match(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../))
+    if (jNode[0].childNodes[0].src.match(/_s\..{3,4}$/))
     {
-        replacer = jNode[0].childNodes[0].src.replace(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../, replace_url)
-    } else if (jNode[0].childNodes[0].src.match(/_0\./)) {
+        replacer = jNode[0].childNodes[0].src.replace(/_s\./, '_l.')
+    } else if (jNode[0].childNodes[0].src.match(/_0\..{3,4}$/)) {
         replacer = jNode[0].childNodes[0].src.replace(/_0\./, '.')
     }
 
