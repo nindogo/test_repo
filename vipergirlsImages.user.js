@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20200405
+// @version         20200410
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -52,6 +52,7 @@ waitForKeyElements('a[href^="http://acidimg.cc/"', process_acidimg);
 // PimpAndHost
 waitForKeyElements('a[href^="https://pimpandhost.com/image/"', process_pimpandhost);
 waitForKeyElements('a[href^="http://pimpandhost.com/image/"', process_pimpandhost);
+waitForKeyElements('a[href~="/pimpandhost.com/"', process_pimpandhost);
 
 // PixHost
 waitForKeyElements('a[href^="https://pixhost.to/show/"', process_pixhost);
@@ -135,11 +136,18 @@ function process_pimpandhost(jNode) {
         return string.replace('_s.', '_l.')
     }
 
-    var replacer = jNode[0].childNodes[0].src.replace(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../, replace_url)
+    var replacer = null
+    if (jNode[0].childNodes[0].src.match(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../))
+    {
+        replacer = jNode[0].childNodes[0].src.replace(/http.*?\/pimpandhost\.com\/.*?\/[0-9]+?(_s\.).../, replace_url)
+    } else if (jNode[0].childNodes[0].src.match(/_0\./)) {
+        replacer = jNode[0].childNodes[0].src.replace(/_0\./, '.')
+    }
+
     if (replacer) {
         jNode[0].href = replacer
         open_in_tab(jNode[0]);
-    }
+    } else { console.log(jNode[0].href) }
 }
 
 function process_pixhost(jNode) {
@@ -162,7 +170,7 @@ function process_fastpic(jNode) {
 
     console.error(site_url);
 
-    }
+}
 
 function process_dpic(jNode) {
     var site_url = jNode[0].href
