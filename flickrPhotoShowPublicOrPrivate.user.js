@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            flickrPhotoShowPublicOrPrivate
 // @namespace       http://tampermonkey.net/
-// @version         20200123
+// @version         20200124
 // @description     On Flickr show whether a photo is public or private by drawing a colored box around it.
 // @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
@@ -13,6 +13,15 @@
 // @match           https://www.flickr.com/photos/*/*
 // @match           https://www.flickr.com/photos/*/*/
 // @match           https://www.flickr.com
+// @match           https://flickr.com/groups/*/pool/*
+// @match           https://flickr.com/groups/*/pool/*/
+// @match           https://flickr.com/photos/*/
+// @match           https://flickr.com/photos/*
+// @match           https://flickr.com/people/*/
+// @match           https://flickr.com/people/*
+// @match           https://flickr.com/photos/*/*
+// @match           https://flickr.com/photos/*/*/
+// @match           https://flickr.com
 // @grant           GM_xmlhttpRequest
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 //                  Selectors and the following script require jQuery.
@@ -114,7 +123,7 @@ function showHiddenOrOpen_3(jNode){
         context: jNode,
         onload: function(response){
             var a = (JSON.parse(response.responseText)).stat;
-            var b = response.context[0];
+            var b = response.context[0].childNodes[5];
 
             if (a == 'ok') {
                 b.style.border = "5px solid #39ff14";
