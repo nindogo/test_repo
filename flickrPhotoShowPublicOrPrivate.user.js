@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            flickrPhotoShowPublicOrPrivate
 // @namespace       http://tampermonkey.net/
-// @version         20200124
+// @version         20200126
 // @description     On Flickr show whether a photo is public or private by drawing a colored box around it.
 // @author          nindogo
 // @match           https://www.flickr.com/groups/*/pool/*
@@ -37,6 +37,9 @@ waitForKeyElements(".pool-photo.photo-display-item", showHiddenOrOpen_2);
 waitForKeyElements(".activity-card-photo  ", showHiddenOrOpen_2);
 
 waitForKeyElements(".preview-img-link", showHiddenOrOpen_3);
+waitForKeyElements(".preview-video-link", showHiddenOrOpen_4);
+// waitForKeyElements("div.videoplayer", showHiddenOrOpen_4);
+
 
 function showHiddenOrOpen(jNode){
 
@@ -124,6 +127,41 @@ function showHiddenOrOpen_3(jNode){
         onload: function(response){
             var a = (JSON.parse(response.responseText)).stat;
             var b = response.context[0].childNodes[5];
+
+            if (a == 'ok') {
+                b.style.border = "5px solid #39ff14";
+            }
+            else if (a == 'fail'){
+                b.style.border = "5px solid #F71F12";
+            }
+
+        }
+
+    })
+}
+
+function showHiddenOrOpen_4(jNode){
+    var photo_id = jNode[0].href.split("/")[5];
+
+    var protocol = window.location.protocol;
+    var api_key = "9f7fba1e66c150084f948ab8df0ce3a9"
+
+//     console.log(photo_id);
+
+    var url = protocol+'//api.flickr.com/services/rest/'
+    +'?method=flickr.photos.getFavorites'
+    +'&api_key=' + api_key
+    +'&format=json&nojsoncallback=1'
+    +'&photo_id=' + photo_id;
+
+
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: url,
+        context: jNode,
+        onload: function(response){
+            var a = (JSON.parse(response.responseText)).stat;
+            var b = response.context[0].childNodes[1];
 
             if (a == 'ok') {
                 b.style.border = "5px solid #39ff14";
