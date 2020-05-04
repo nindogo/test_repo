@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            Auto Scroll Daft Sex
-// @version         20200501
+// @version         20200502
 // @description     autoscroll daftsex
 // @author          nindogo
 // @require         https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js
@@ -14,9 +14,14 @@ var sensitivity=200;
 
 $(window).scroll(function() {
     if ($(window).scrollTop() + $(window).height() >= ($(document).height() - sensitivity)) {
-        var hapa = $('div.more')
-        if(hapa.length != 0) {
-            more(hapa);
+        var searchMore = $('div.more')
+        if(searchMore.length != 0) {
+            more(searchMore);
+        }
+
+        var moreSimilar = $('div.more-similar')
+        if (moreSimilar.length != 0){
+            loadMoreSimilar(moreSimilar);
         }
     }
 })
