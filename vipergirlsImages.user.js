@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20220602
+// @version         20220603
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -20,6 +20,7 @@
 // @connect         depic.me
 // @connect         imagevenue.com
 // @connect         vipr.im
+// @connect         pixroute.com
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
 
@@ -78,7 +79,12 @@ waitForKeyElements('a[href*="imagevenue.com"', process_imagevenue);
 
 // vipr.im
 waitForKeyElements('a[href^="https://vipr.im/"', process_vipr_im);
-waitForKeyElements('a[href^="https://vipr.im/"', process_vipr_im);
+waitForKeyElements('a[href^="http://vipr.im/"', process_vipr_im);
+
+
+// PixRoute
+waitForKeyElements('a[href^="https://www.pixroute.com/"', process_pixroute);
+waitForKeyElements('a[href^="http://www.pixroute.com/"', process_pixroute);
 
 
 function process_imx_to(jNode){
@@ -223,6 +229,23 @@ function process_vipr_im(jNode){
     var img_page = jNode[0].childNodes[0].src;
     var site_url = jNode[0].href;
     var re_link = '<a href="(.*?)" download class="ddownloader"'
+
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: site_url,
+        context: jNode,
+        onload: function(response){
+            response.context[0].href = response.responseText.match(re_link)[1]
+            open_in_tab(response.context[0]);
+        }
+    })
+}
+
+
+function process_pixroute(jNode){
+    var img_page = jNode[0].childNodes[0].src;
+    var site_url = jNode[0].href;
+    var re_link = '<img id="imgpreview" src="(.*?)"'
 
     GM_xmlhttpRequest({
         method: 'GET',
