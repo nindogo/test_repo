@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20220601
+// @version         20220602
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -19,6 +19,7 @@
 // @connect         dpic.me
 // @connect         depic.me
 // @connect         imagevenue.com
+// @connect         vipr.im
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
 
@@ -74,6 +75,11 @@ waitForKeyElements('a[href^="http://depic.me/"', process_dpic);
 
 // imagevenue.com
 waitForKeyElements('a[href*="imagevenue.com"', process_imagevenue);
+
+// vipr.im
+waitForKeyElements('a[href^="https://vipr.im/"', process_vipr_im);
+waitForKeyElements('a[href^="https://vipr.im/"', process_vipr_im);
+
 
 function process_imx_to(jNode){
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
@@ -209,6 +215,22 @@ function process_imagevenue(jNode) {
             {
                 typeof Function.prototype === "function"
             }
+        }
+    })
+}
+
+function process_vipr_im(jNode){
+    var img_page = jNode[0].childNodes[0].src;
+    var site_url = jNode[0].href;
+    var re_link = '<a href="(.*?)" download class="ddownloader"'
+
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: site_url,
+        context: jNode,
+        onload: function(response){
+            response.context[0].href = response.responseText.match(re_link)[1]
+            open_in_tab(response.context[0]);
         }
     })
 }
