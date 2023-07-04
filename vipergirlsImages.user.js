@@ -1,15 +1,30 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20220603
+// @version         20230703
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
 // @require         https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js
 //                  jQuery
 // @author          nindogo
-// @match           http://vipergirls.to/*
 // @match           https://vipergirls.to/*
+// @match           http://vipergirls.to/*
+// @match           https://planetviper.club/*
+// @match           http://planetviper.club/*
+// @match           http://www.planetsuzy.org/*
+// @match           https://viper.to/*
+// @match           http://viper.to/*
+// @match           https://viperbb.rocks/*
+// @match           http://viperbb.rocks/*
+// @match           https://viperkats.eu/*
+// @match           http://viperkats.eu/*
+// @match           https://viperohilia.art/*
+// @match           http://viperohilia.art/*
+// @match           https://viperproxy.org/*
+// @match           http://viperproxy.org/*
+// @match           https://vipervault.link/*
+// @match           http://vipervault.link/*
 // @grant           GM_openInTab
 // @grant           GM_xmlhttpRequest
 // @connect         turboimagehost.com
@@ -23,7 +38,6 @@
 // @connect         pixroute.com
 // @downloadURL     https://github.com/nindogo/test_repo/raw/master/vipergirlsImages.user.js
 // ==/UserScript==
-
 function open_in_tab(node) {
     var clickHandler = function(e) {
         GM_openInTab(node.href, 'loadInBackground');
@@ -44,8 +58,8 @@ waitForKeyElements('a[href^="https://www.turboimagehost.com/"', process_turboima
 waitForKeyElements('a[href^="http://www.turboimagehost.com/"', process_turboimage);
 
 // ImageBam
-waitForKeyElements('a[href^="https://www.imagebam.com/image/"', process_imagebam);
-waitForKeyElements('a[href^="http://www.imagebam.com/image/"', process_imagebam);
+waitForKeyElements('a[href^="https://www.imagebam.com/"', process_imagebam);
+waitForKeyElements('a[href^="http://www.imagebam.com/"', process_imagebam);
 
 // AcidImg
 waitForKeyElements('a[href^="https://acidimg.cc/"', process_acidimg);
@@ -87,25 +101,25 @@ waitForKeyElements('a[href^="https://www.pixroute.com/"', process_pixroute);
 waitForKeyElements('a[href^="http://www.pixroute.com/"', process_pixroute);
 
 
-function process_imx_to(jNode){
+function process_imx_to(jNode) {
     jNode[0].parentNode.href = jNode[0].src.replace('/t/', '/i/');
     open_in_tab(jNode[0].parentNode);
 }
 
-function process_imxto_2(jNode){
+function process_imxto_2(jNode) {
     var site_url = jNode[0].src
     GM_xmlhttpRequest({
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
+        onload: function(response) {
             response.context[0].parentNode.href = response.finalUrl.replace('/t/', '/i/')
             open_in_tab(response.context[0].parentNode);
         }
     })
 }
 
-function process_turboimage(jNode){
+function process_turboimage(jNode) {
     var img_page = jNode[0].childNodes[0].src;
     var site_url = jNode[0].href;
     var re_link = '<meta property="og:image" content="(.*?)"'
@@ -114,15 +128,16 @@ function process_turboimage(jNode){
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
+        onload: function(response) {
             response.context[0].href = response.responseText.match(re_link)[1]
             open_in_tab(response.context[0]);
         }
     })
 }
 
-function process_imagebam(jNode){
+function process_imagebam(jNode) {
     var img_page = jNode[0].childNodes[0].src;
+    console.log(img_page)
     var site_url = jNode[0].href;
     var re_link = '<a class="text-decoration-none" href="(https://image.*?)"'
 
@@ -130,8 +145,10 @@ function process_imagebam(jNode){
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
-            response.context[0].href = response.responseText.match(re_link)[1]
+        onload: function(response) {
+            var this_url = response.responseText.match(re_link)[1]
+            response.context[0].href = this_url
+            console.log(this_url)
             open_in_tab(response.context[0]);
         }
     })
@@ -150,8 +167,7 @@ function process_pimpandhost(jNode) {
     // https://vipergirls.to/threads/4562726-Collection-of-porn-scenes-with-sexy-black-girls
 
     var replacer = null
-    if (jNode[0].childNodes[0].src.match(/_s\..{3,4}$/))
-    {
+    if (jNode[0].childNodes[0].src.match(/_s\..{3,4}$/)) {
         replacer = jNode[0].childNodes[0].src.replace(/_s\./, '_l.')
     } else if (jNode[0].childNodes[0].src.match(/_0\..{3,4}$/)) {
         replacer = jNode[0].childNodes[0].src.replace(/_0\./, '.')
@@ -160,7 +176,9 @@ function process_pimpandhost(jNode) {
     if (replacer) {
         jNode[0].href = replacer
         open_in_tab(jNode[0]);
-    } else { console.log(jNode[0].href) }
+    } else {
+        console.log(jNode[0].href)
+    }
 }
 
 function process_pixhost(jNode) {
@@ -193,7 +211,7 @@ function process_dpic(jNode) {
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
+        onload: function(response) {
             response.context[0].href = response.response.match(re_link)[1]
             open_in_tab(response.context[0])
         }
@@ -203,29 +221,29 @@ function process_dpic(jNode) {
 
 function process_imagevenue(jNode) {
     var site_url = jNode[0].href
-    var re_link = /(img|IMG).*?[s|S][R|r][C|c]=["|'](.*?)['|"]/
+    // var re_link = /(img|IMG).*?[s|S][R|r][C|c]=["|'](.*?)['|"]/
+    var re_link = /(card-body.*?href.*?img.*?src=")(?<the_url>[^"]*)"/gsi
 
     GM_xmlhttpRequest({
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
-            var response_link = response.response.match(re_link);
-            try{
-                if (response_link[2]) {
-                    response.context[0].href = (response.finalUrl).split('img.php')[0] + response_link[2]
+        onload: function(response) {
+            var response_link = response.response.match(re_link)[0];
+
+            try {
+                if (response_link) {
+                    response.context[0].href = response_link.split("\n").slice(-1)[0].split('"')[1];
                     open_in_tab(response.context[0])
                 }
-            }
-            catch(error)
-            {
+            } catch (error) {
                 typeof Function.prototype === "function"
             }
         }
     })
 }
 
-function process_vipr_im(jNode){
+function process_vipr_im(jNode) {
     var img_page = jNode[0].childNodes[0].src;
     var site_url = jNode[0].href;
     var re_link = '<a href="(.*?)" download class="ddownloader"'
@@ -234,7 +252,7 @@ function process_vipr_im(jNode){
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
+        onload: function(response) {
             response.context[0].href = response.responseText.match(re_link)[1]
             open_in_tab(response.context[0]);
         }
@@ -242,7 +260,7 @@ function process_vipr_im(jNode){
 }
 
 
-function process_pixroute(jNode){
+function process_pixroute(jNode) {
     var img_page = jNode[0].childNodes[0].src;
     var site_url = jNode[0].href;
     var re_link = '<img id="imgpreview" src="(.*?)"'
@@ -251,7 +269,7 @@ function process_pixroute(jNode){
         method: 'GET',
         url: site_url,
         context: jNode,
-        onload: function(response){
+        onload: function(response) {
             response.context[0].href = response.responseText.match(re_link)[1]
             open_in_tab(response.context[0]);
         }
