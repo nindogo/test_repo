@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ViperGirls Images
 // @namespace       https://nindogo.tumblr.com/
-// @version         20230703
+// @version         20240703
 // @description     Link to the actual image in vipergirls.
 // @require         https://gist.githubusercontent.com/raw/2625891/waitForKeyElements.js
 //                  The previous require is from a script of Brock Adams (Thanks to him!)
@@ -138,8 +138,11 @@ function process_turboimage(jNode) {
 function process_imagebam(jNode) {
     var img_page = jNode[0].childNodes[0].src;
     console.log(img_page)
+    console.log("img_page")
     var site_url = jNode[0].href;
-    var re_link = '<a class="text-decoration-none" href="(https://image.*?)"'
+    //var re_link = '<a href="(https://image.*?)"'
+    var re_link = 'src="(https:\/\/images\d?.*?)"'
+    //var re_link = '<a hrxef="(https:\/\/www\.imagebam\.com\/view\/.*?)"'
 
     GM_xmlhttpRequest({
         method: 'GET',
